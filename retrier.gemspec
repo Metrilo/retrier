@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'retrier'
+require_relative 'lib/retrier'
 
 Gem::Specification.new do |spec|
   spec.name          = 'retrier'
@@ -10,13 +8,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Metrilo']
   spec.email         = ['support@metrilo.com']
 
-  spec.summary       = 'Retry a ruby block.'
-  spec.description   = 'Retry a ruby block.'
+  spec.summary       = 'Retry a Ruby block for a specific error.'
+  spec.description   = 'Retry a Ruby block for a specific error.'
   spec.homepage      = 'https://github.com/Metrilo/retrier'
-
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
+  spec.files         = Dir.glob('lib/**/*') + %w[README.md]
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '>= 2.3'

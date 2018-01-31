@@ -1,12 +1,12 @@
-`Retrier` is a small ruby class that helps you try to execute a block of code more than once.
-It catches a specific exception, waits certain amount of time and tries the code again until the retry count is exhausted.
+`Retrier` is a small Ruby class that helps you try to execute a block of code more than once.
+It catches a specific exception, waits for a certain amount of time and tries the code again until the retry count is exhausted.
 
 You just pass: `ErrorClass`, `waiting_time` (seconds), `attempts`:
 ```ruby
 retrier = Retrier.new(Mailgun::Error, waiting_time: 5, attempts: 3)
 
 retrier.execute do
-  # some request to Mailgun or other third-party API
+  # arbitrary Ruby code
 end
 ```
 

@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'retrier'
+require 'pry'
+require_relative '../lib/retrier'
