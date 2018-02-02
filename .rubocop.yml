@@ -1,0 +1,21 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - Gemfile
+
+Documentation:
+  Enabled: false
+
+NumericLiterals:
+  Enabled: false
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - describe
+    - it
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/LineLength:
+  Max: 100
