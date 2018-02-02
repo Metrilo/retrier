@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-module RetrierTest
+describe Retrier do
   class RetriableError < StandardError; end
   class NonRetriableError < StandardError; end
-end
 
-describe Retrier do
-  subject { described_class.new(RetrierTest::RetriableError, waiting_time: 1, attempts: attempts) }
+  subject { described_class.new(RetriableError, waiting_time: 1, attempts: attempts) }
   let(:attempts) { 3 }
 
   before { allow(described_class).to receive(:sleep) }
@@ -25,7 +23,7 @@ describe Retrier do
 
           # raise an error at the first attempt
           # return a result at the second one
-          block_executions.odd? ? raise(RetrierTest::RetriableError) : 'result'
+          block_executions.odd? ? raise(RetriableError) : 'result'
         end
       ).to eq('result')
 
@@ -39,9 +37,9 @@ describe Retrier do
         subject.execute do
           block_executions += 1
 
-          raise(RetrierTest::RetriableError, 'There is something wrong here')
+          raise(RetriableError, 'There is something wrong here')
         end
-      end.to raise_error(RetrierTest::RetriableError, 'There is something wrong here')
+      end.to raise_error(RetriableError, 'There is something wrong here')
 
       expect(block_executions).to eq(attempts)
     end
@@ -49,9 +47,9 @@ describe Retrier do
     it 'raises an error when error is not the one to retry' do
       expect do
         subject.execute do
-          raise RetrierTest::NonRetriableError
+          raise NonRetriableError
         end
-      end.to raise_error(RetrierTest::NonRetriableError)
+      end.to raise_error(NonRetriableError)
     end
   end
 end
